@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <title>eLEARNING - eLearning HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Modifier la leçon</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="title" class="form-label">Titre</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{ lecon.title }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ lecon.description }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input class="form-control" type="file" id="image" name="image">
+                {% if lecon.image %}
+                <img src="{{ lecon.image.url }}" alt="Current image" class="mt-3" style="width: 200px;">
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="video" class="form-label">Vidéo</label>
+                <input class="form-control" type="file" id="video" name="video">
+                {% if lecon.video %}
+                <video width="320" height="240" controls class="mt-3">
+                    <source src="{{ lecon.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="pdf" class="form-label">Document PDF</label>
+                <input class="form-control" type="file" id="pdf" name="pdf">
+                {% if lecon.pdf %}
+                <a href="{{ lecon.pdf.url }}" class="d-block mt-3">Voir le document actuel</a>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="matiere" class="form-label">Matière</label>
+                <select class="form-select" id="matiere" name="matiere" required>
+                    {% for matiere in matieres %}
+                    <option value="{{ matiere.id }}" {% if lecon.matiere.id == matiere.id %}selected{% endif %}>{{ matiere.nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="niveau" class="form-label">Niveau</label>
+                <select class="form-select" id="niveau" name="niveau" required>
+                    {% for niveau in niveaux %}
+                    <option value="{{ niveau.niveau }}" {% if lecon.niveau.id == niveau.id %}selected{% endif %}>{{ niveau.niveau }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Modifier</button>
+        </form>
+    </div>
+</body>
+</html>

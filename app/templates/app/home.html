@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <title>eLEARNING - eLearning HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
+        </a>
+
+        
+
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="{% url 'home' %}" class="nav-item nav-link active">Acceuil</a>
+                <a href="{% url 'cours' %}" class="nav-item nav-link">Cours</a>
+                
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+            {% if user.is_authenticated %}
+                    <a href="{% url 'edit_user_info' %}" class="nav-item nav-link">Modifier Infos</a>
+                    {% if user.is_staff or user.is_superuser %}
+                        <a href="" class="nav-item nav-link">Ajouts Cours</a>
+                    {% endif %}
+                    <p class="btn btn-light py-md-3 px-md-5 animated slideInRight">{{user.username}} <br> niveau {{level}}</p>
+                    <a href="{% url 'deconnexion' %}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                          </svg>
+                    </a>
+                    
+                {% else %}
+                    <a href="{% url 'register' %}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
+
+                {% endif %}>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0 mb-5">
+        <div class="owl-carousel header-carousel position-relative">
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="{% static 'img/homme.jpg' %}" alt="">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-sm-10 col-lg-8">
+                                <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Formez vous sur notre plateforme</h5>
+                                <h1 class="display-3 text-white animated slideInDown">Plateforme d'apprentissage en ligne</h1>
+                                <p class="fs-5 text-white mb-4 pb-2">Inscrivez vous sur notre plateforme des maitenant</p>
+                                {% if user.is_authenticated %}
+                                {% else %}
+                                    <a href="{% url 'register' %}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
+                                {% endif %}
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="{% static 'img/hommes.jpg' %}" alt="">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-sm-10 col-lg-8">
+                                <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Formez vous sur notre plateforme</h5>
+                                <h1 class="display-3 text-white animated slideInDown">Plateforme d'apprentissage en ligne</h1>
+                                <p class="fs-5 text-white mb-4 pb-2">Cours videos, documents telechargeables plus de nombreux exercices d'approfondissement. Posez vos problemes grace a notre forum de discussion et laissez vous guider par des expers !</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+    <div class="container mt-5">
+        <h4 style="text-align: center;">Jetez un coup d'oeil sur votre progression sur les elevaluation !</h4><br>
+        <h5 style="text-align: center; color: #06BBCC;">Completez des evaluations et passez en classe superieurs</h5><br>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: {{ progress }}%;" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
+        </div>
+
+    </div>
+    {% if passe %}
+        <div class="mt-3 text-center">
+            <a href="{% url 'changer_niveau' %}" class="btn btn-success">Passer au niveau suivant</a>
+        </div>
+    {% endif %}
+    </div>
+
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="d-flex flex-column align-items-center justify-content-center text-center bg-light rounded py-5 px-3">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-white shadow rounded-circle mb-4" style="width: 100px; height: 100px;">
+                            <i class="fa fa-graduation-cap fa-2x text-primary"></i>
+                        </div>
+                        <h4 class="font-weight-bold m-0">Instructeurs qualifiés</h4>
+                        <p class="text-muted mt-2">Nos instructeurs sont des experts dans leurs domaines avec des années d'expérience.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="d-flex flex-column align-items-center justify-content-center text-center bg-light rounded py-5 px-3">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-white shadow rounded-circle mb-4" style="width: 100px; height: 100px;">
+                            <i class="fa fa-globe fa-2x text-primary"></i>
+                        </div>
+                        <h4 class="font-weight-bold m-0">Classes en ligne</h4>
+                        <p class="text-muted mt-2">Accédez à nos cours de n'importe où et à tout moment avec notre plateforme en ligne.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="d-flex flex-column align-items-center justify-content-center text-center bg-light rounded py-5 px-3">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-white shadow rounded-circle mb-4" style="width: 100px; height: 100px;">
+                            <i class="fa fa-home fa-2x text-primary"></i>
+                        </div>
+                        <h4 class="font-weight-bold m-0">Projets à domicile</h4>
+                        <p class="text-muted mt-2">Complétez des projets pratiques qui renforcent les concepts appris en classe.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="d-flex flex-column align-items-center justify-content-center text-center bg-light rounded py-5 px-3">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-white shadow rounded-circle mb-4" style="width: 100px; height: 100px;">
+                            <i class="fa fa-book fa-2x text-primary"></i>
+                        </div>
+                        <h4 class="font-weight-bold m-0">Bibliothèque de livres</h4>
+                        <p class="text-muted mt-2">Accédez à une vaste bibliothèque de livres et de documents de référence pour approfondir vos connaissances.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Service End -->
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <img class="img-fluid rounded mb-4 mb-lg-0" src="{% static 'img/hommes.jpg' %}" alt="">
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-left mb-4">
+                        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">À PROPOS DE NOUS</h5>
+                        <h1>Bienvenue sur eLEARNING</h1>
+                    </div>
+                    <p>Notre plateforme eLearning est dédiée à offrir une éducation de qualité à travers des cours en ligne accessibles et flexibles. Nous croyons en l'importance de l'apprentissage continu et en la possibilité pour chacun d'améliorer ses compétences à son propre rythme.</p>
+                    <p>Avec une large gamme de cours couvrant divers sujets, des instructeurs expérimentés et des ressources de qualité, nous visons à créer une expérience d'apprentissage enrichissante pour tous nos étudiants.</p>
+                    <div class="row pt-2">
+                        <div class="col-6">
+                            <ul class="fa-ul">
+                                <li class="mb-2"><span class="fa-li"><i class="fa fa-check text-primary"></i></span>Instructeurs qualifiés</li>
+                                <li class="mb-2"><span class="fa-li"><i class="fa fa-check text-primary"></i></span>Certificat international</li>
+                                <li class="mb-2"><span class="fa-li"><i class="fa fa-check text-primary"></i></span>Classes en ligne</li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="fa-ul">
+                                <li class="mb-2"><span class="fa-li"><i class="fa fa-check text-primary"></i></span>Projets à domicile</li>
+                                <li class="mb-2"><span class="fa-li"><i class="fa fa-check text-primary"></i></span>Bibliothèque de livres</li>
+                                <li class="mb-2"><span class="fa-li"><i class="fa fa-check text-primary"></i></span>Soutien en ligne</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary mt-3 px-5">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- About End -->
+
+
+    <!-- Courses Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Cours</h6>
+                <h1 class="mb-5">Matieres</h1>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                {% for matiere in matieres%}
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" >
+                    <div class="course-item bg-light">
+                        
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid" src="{{ matiere.image.url }}" alt="">
+                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'lesson' matiere.nom %}" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                {% else %}
+                                    <a href="{% url 'register' %}" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Connectez vous pour voir</a>
+                                {% endif %}
+                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Join Now</a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 pb-0">
+                            <h3 class="mb-0">$149.00</h3>
+                            <div class="mb-3">
+                                
+                                <small>(123)</small>
+                            </div>
+                            <h5 class="mb-4">{{matiere.nom}}</h5>
+                        </div>
+                        
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+            
+        </div>
+    </div>
+    <!-- Courses End -->
+        
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>ESI, BOBO DSSO</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+226 71698422 - 66071622</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>jeaniveskoeta@gmail.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript --> 
+     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

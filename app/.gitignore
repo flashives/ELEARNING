@@ -1,0 +1,24 @@
+# Django specific
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+
+# Environments
+.env
+venv/
+env/
+ENV/
+.venv/
+
+# Pytest
+.pytest_cache/
+.pytest_cache/*
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
